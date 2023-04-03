@@ -1,3 +1,3 @@
 ## The big picture
 
-![image info](./img/bigpicture-nodered.png)
+![image info](./img/final-bigpicture-nodered.png)
