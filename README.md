@@ -72,7 +72,21 @@ In the option `Settings` >> `Data Logging & Upload`, do the following steps:
 
 After that, if the OBD-II is rightly connected to Torque App Pro, you should start receiving messages at the Node-RED server with the values of each measure made by the sensors of your car. 
 
-### Part III) Analyze your data
+### Part III) Configure your service on Timescale
+
+1- Create an account on [Timescale](https://www.timescale.com/)
+
+2- On the `Services` page, choose the option `Create service` and create the service to store your data. Wait until the deployment is complete.
+
+3- Afterward, go to `Connection Info` and retrieve the following information: database name, host, port, username, and password.
+
+4- Access the server in Node-RED, and in the node labeled `Connection Timescale`, click on the pencil icon and update the information with your database connection details. 
+
+5- Go back to your server in Node-RED and press the button beside the node labeled `SQL create table` (to create the table to store data in Timescale), and then, press the button beside the node labeled `SQL create hypertable` (to create a hypertable in Timescale).
+
+### Part IV) Analyse your data
+
+
 
 
 
