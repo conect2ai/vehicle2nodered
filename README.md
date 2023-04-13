@@ -49,7 +49,7 @@ In the menu located in the upper right corner, click in the option `Manage palle
 
 5- Import the Node-RED flow
 
-In the option `Import`, choose the option `select a file to import` and select the file `flows.json` that is in this repository. Press the button `Deploy` to save the changes, and the server is ready to work!
+In the option `Import`, choose the option `select a file to import` and select the file `flows.json` that is in this repository. Press the button `Deploy` to save the changes, and the server is ready almost to work!
 
 ### Part II) Configure Torque App Pro
 
@@ -70,8 +70,6 @@ In the option `Settings` >> `Data Logging & Upload`, do the following steps:
 
 - In the option `User email address`, put your e-mail
 
-After that, if the OBD-II is rightly connected to Torque App Pro, you should start receiving messages at the Node-RED server with the values of each measure made by the sensors of your car. 
-
 ### Part III) Configure your service on Timescale
 
 1- Create an account on [Timescale](https://www.timescale.com/)
@@ -84,7 +82,39 @@ After that, if the OBD-II is rightly connected to Torque App Pro, you should sta
 
 5- Go back to your server in Node-RED and press the button beside the node labeled `SQL create table` (to create the table to store data in Timescale), and then, press the button beside the node labeled `SQL create hypertable` (to create a hypertable in Timescale).
 
+Now, the server is ready, and if everything has been configured correctly, you should start receiving messages in Node-RED with values from your vehicle's sensors.
+
 ### Part IV) Analyse your data
+
+1- Open the file `Connect_Timescale.ipynb` in Google Colab or Jupyter Notebook.
+
+2- Change the values of your database connection in this cell, in the section `Connection to database`.
+
+```
+your_username = "user" # Your username from Timescale here
+your_password = "password" # Your password from Timescale here
+your_host = "host" # Your host from Timescale here
+your_port = "port" # Your port from Timescale here
+your_database_name = "database" # Your database name from Timescale here
+
+engine = db.create_engine('postgresql://'+your_username+':'+your_password+'@'+your_host+':'+your_port+'/'+your_database_name)
+```
+
+3- Now, change the values you want to see of your trip, with your e-mail (the same that was put in Torque App Pro) and the date of the trip. This cell is in the section `Information in graphs`.
+
+```
+user_email = 'youremail@email.com' #Put your e-mail here
+day = '2023-04-10' #Put the day of the trip here (format yyyy-mm-dd)
+day_to_filter = pd.Timestamp(day).date()
+
+df_filter = df[df['appid_userentered'] == user_email] 
+df_filter = df_filter[df_filter['time_sec'].dt.date == day_to_filter] 
+
+print(df_filter.shape)
+df_filter.head()
+```
+
+4- Run the notebook and see information about your trip!
 
 
 
