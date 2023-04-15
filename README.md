@@ -61,7 +61,7 @@ When you access the app, select the gear in the lower left corner, then `Setting
 
 In the option `Settings` >> `Data Logging & Upload`, do the following steps:
 
-- In the option `Select what to log`, choose the sensors you want to read from your car
+- In the option `Select what to log`, choose the sensors you want to read from your car (OBS.: make sure you selected the sensors `Trip Distance`, `GPS Latitude`, `GPS Longitude`, `Trip Time (Since journey start)`, `Speed (OBD)`)
 - In the option `File Logging Interval`, choose the option 1 second
 - In the option `Web Logging Interval`, choose the option Every minute or a higher number
 - In the option `Webserver URL`, put `http://<your-ip>:1880/upload` 
